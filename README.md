@@ -64,7 +64,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 脚本会：备份他的 profile → 写入 `link:<解压目录>` 依赖 → 把 `dsh-session-delete` 追加进 `dsh.profile.bundles` → 用 DSH 自带的 node/pnpm 安装 → 校验能否解析，最后提示重启。可重复执行；先加 `-DryRun` 只预览不落盘，`-Profile` / `-DshHome` 可指定其他 profile 或主目录。
 
 **B. 给一个 tarball**
-用 `pnpm pack` 打出 `dsh-session-delete-0.1.0.tgz`（只含 `files` 里列的文件，`test/` 不会打进去）。对方在插件管理里安装本地包，或手动：
+直接从 [Releases](https://github.com/HHHHHH233333/dsh-session-delete/releases/latest) 下载 `dsh-session-delete-0.1.0.tgz`，或本地用 `pnpm pack` 重新打（只含 `files` 里列的文件，`test/` 不会打进去）。对方在插件管理里安装本地包，或手动：
 
 ```powershell
 pnpm add .\dsh-session-delete-0.1.0.tgz
@@ -72,9 +72,11 @@ pnpm add .\dsh-session-delete-0.1.0.tgz
 
 然后把 `dsh-session-delete` 加进 `dsh.profile.bundles` 并重启。
 
-**C. 放 GitHub / npm**
-- GitHub：把目录推成仓库，对方在插件管理里用仓库地址安装（管理器会 clone 并执行 pnpm）。
-- npm：先把 `package.json` 里的 `"private": true` 改成 `false`，再 `npm publish`。无前缀的 `dsh-session-delete` 可能已被占用，必要时改成 `@你的scope/dsh-session-delete`——插件行 id 就是包名，改名后 `dsh.profile.bundles` 里的条目和 `link:` 路径都要跟着改。
+**C. 从仓库装（推荐给熟悉 DSH 的人）**
+在 DSH 的插件管理里填仓库地址 `https://github.com/HHHHHH233333/dsh-session-delete`，管理器会 clone 并执行 pnpm 安装、自动把这个 bundle 加进 profile。
+
+**D. 发到 npm**
+先把 `package.json` 里的 `"private": true` 改成 `false`，再 `npm publish`。无前缀的 `dsh-session-delete` 可能已被占用，必要时改成 `@你的scope/dsh-session-delete`——插件行 id 就是包名，改名后 `dsh.profile.bundles` 里的条目和 `link:` 路径都要跟着改。
 
 **对方需要什么**：桌面版或 web profile 的 DSH（`@deepseek-ai/dsh-base` 提供 `webServer` / `workspaceRegistry` / `sessionPersistence`，本插件依赖这三个服务）；装完必须重启应用。
 
