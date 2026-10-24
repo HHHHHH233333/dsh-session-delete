@@ -1,0 +1,24 @@
+# dsh-session-delete — bundle patch layer
+#
+# Inserts one Host row. The package is both the bundle carrier and the plugin, so
+# the row id, the package name, and the client module id are the same string, the
+# convention the shipped bundles and the official template follow.
+#
+# The Host half registers `/.dsh-session-delete/{health,preview,delete}` on the
+# composed Web server. The browser half adds the "彻底删除会话…" row to the Session
+# menu and the confirmation dialog.
+#
+# Optional tuning (uncomment to override the defaults):
+#
+#   sessionsRoot: absolute path          # default: $DSH_HOME/sessions
+#   dshHome: absolute path               # default: $DSH_HOME, then ~/.dsh
+#   spillRoots: [absolute path, ...]     # extra dsh-spill roots; OS temp is scanned anyway
+#   settleMs: 1200                       # wait after stop before removing files
+#   lateSweepMs: 6000                    # background sweep after the projection-cache interval
+#
+- insert:
+    - id: dsh-session-delete
+      name: dsh-session-delete
+      config:
+        settleMs: 1200
+        lateSweepMs: 6000

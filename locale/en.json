@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Delete Session Permanently",
+    "description": "Adds “Delete permanently…” to the session menu: removes the chat log, cached title and statistics, spill files, and optionally the subagent sessions it spawned."
+  }
+}

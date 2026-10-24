@@ -1,0 +1,59 @@
+{
+  "name": "dsh-session-delete",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Permanently delete a DeepSeek Harness session: its chat log, projection cache, spill files, and the subagent sessions it spawned.",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "session",
+    "delete",
+    "privacy"
+  ],
+  "license": "MIT",
+  "author": "HHHHHH233333",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HHHHHH233333/dsh-session-delete.git"
+  },
+  "homepage": "https://github.com/HHHHHH233333/dsh-session-delete#readme",
+  "bugs": {
+    "url": "https://github.com/HHHHHH233333/dsh-session-delete/issues"
+  },
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "lib",
+    "locale/*.json",
+    "icon.svg",
+    "cordis.patch.yml",
+    "install.ps1",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "check": "node --check index.js && node --check lib/service.js && node --check lib/purge.js && node --check client.js"
+  }
+}
